@@ -12,7 +12,7 @@ Unified Wallet Kit is an open-sourced, comprehensive wallet adapter, designed to
 
 NPM Package: [https://www.npmjs.com/package/@jup-ag/wallet-adapter](https://www.npmjs.com/package/@jup-ag/wallet-adapter)
 
-Motivation
+Motivations
 ----------
 
 Why reinvent the wheel? In developing dApps, we often repeat tasks such as notifications for wallet states, auto-reconnection, and ensuring mobile-first, responsive designs. Unified Wallet Kit streamlines this process, providing a cohesive solution that includes theme support and internationalization (i18n).

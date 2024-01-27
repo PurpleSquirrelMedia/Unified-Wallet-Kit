@@ -2,126 +2,63 @@
 
 <img src="public/unified-wallet-kit-demo.gif" />
 
-Unified Wallet Kit is an open-sourced, Swiss Army Knife wallet adapter, striving for the best wallet integration experience for developers, and best wallet experience for your users.
+Unified Wallet Kit by Purple Squirrel Media
+===========================================
 
-Along with [Terminal](https://terminal.jup.ag), it's the fastest way to get started on Solana.
+Introduction
+------------
 
-Used by Jupiter and Meteora.
+Unified Wallet Kit is an open-sourced, comprehensive wallet adapter, designed to deliver an unparalleled wallet integration experience for developers, and a seamless wallet usage experience for users. Together with Terminal, it represents the quickest route to get started on Solana, and is used by notable applications like Jupiter and Meteora.
 
-NPM: https://www.npmjs.com/package/@jup-ag/wallet-adapter
+NPM Package: [https://www.npmjs.com/package/@jup-ag/wallet-adapter](https://www.npmjs.com/package/@jup-ag/wallet-adapter)
 
-## Motives
+Motivation
+----------
 
-Why not just use the existing wallet adapters?
+Why reinvent the wheel? In developing dApps, we often repeat tasks such as notifications for wallet states, auto-reconnection, and ensuring mobile-first, responsive designs. Unified Wallet Kit streamlines this process, providing a cohesive solution that includes theme support and internationalization (i18n).
 
-- To bootstrap a dApp, we always find ourself doing the same thing over and over again, such as:
-  - Notification when wallets are selected, connecting, connected, disconnected.
-  - Auto reconnect to the last connected wallet
-  - Mobile-first, responsive design
-  - Themeing support
-  - Internationalization (i18n) support
-  - New user onboarding
-- Built on-top of `@solana/wallet-adapter-base`, `@solana/wallet-adapter-react` and `@solana-mobile/wallet-adapter-mobile`, you are always welcomed to onboard or depart.
+Philosophy
+----------
 
-## Philosophy
+*   **Sensible Defaults**: Set to streamline the development process.
+*   **Lightweight & Fast**: Easy adoption with speedy access.
+*   **Extensible**: BYOW (Bring Your Own Wallets) approach for flexibility.
+*   **Enhanced Onboarding**: Superior user experience for newcomers.
 
-- Set a sensible defaults
-- Lightweight, easy to adopt, fast to access
-- Extensible wallets, with a BYOW (Bring your own wallets) approach
-- Better onboarding experience for new users
+Core Features
+-------------
 
-## Core features
+*   **Compact ESM Bundle**: Main esm bundle at ~94Kb (~20Kb gzipped).
+*   **Comprehensive Wallet Support**: Built-in Wallet Standard and Mobile Wallet Adapter support.
+*   **Responsive Design**: Optimized for mobile platforms.
+*   **Custom Notifications**: Integrated notification system.
+*   **Internationalization (i18n)**: Contributions welcome for additional language support.
+*   **Theming**: Includes Light, Dark, and Jupiter themes, with more on the way.
 
-- [x] Main esm bundle at 94Kb (~20Kb gzipped)
-- [x] Built-in Wallet Standard, Mobile Wallet Adapter support
-- [x] Abstracted wallet adapter, with a BYOW (Bring your own wallets) approach
-- [x] Mobile responsive
-- [x] Notification plug-in
-- [x] Internationalization (i18n)
+Getting Started
+---------------
 
-  - More contributions required for more languages
-  - Currently generated from Copilot
-  - [Help contribute](https://github.com/TeamRaccoons/Unified-Wallet-Kit/blob/main/src/contexts/TranslationProvider/i18n.ts)
+Install using `pnpm i @jup-ag/wallet-adapter` and wrap your app with `<UnifiedWalletProvider />`. Configure it according to your requirements.
 
-- [x] New user onboarding [on Jupiter Station](https://station.jup.ag/partners?category=Wallets)
-  - PR welcomed on [Jupiter Station Github](https://github.com/jup-ag/space-station/)
-- [x] Theming
-  - Light, Dark, Jupiter
-  - More thmes coming soon
-- [x] Pluralization for i18n
+Copy code
 
-## Getting Started
+`const ExampleBaseOnly = () => {   return (     <UnifiedWalletProvider       wallets={[]}       config={{         // Configuration options here       }}     >       <UnifiedWalletButton />     </UnifiedWalletProvider>   ); };  export default ExampleBaseOnly;`
 
-- `pnpm i @jup-ag/wallet-adapter`
-- Wrap your app with `<UnifiedWalletProvider />` and pass in as little to as many wallets you would like to support.
-- Below example is `ExampleBaseOnly.tsx`
+More examples can be found in the demo page or in `src/components/examples`.
 
-```tsx
-const ExampleBaseOnly = () => {
-  return (
-    <UnifiedWalletProvider
-      wallets={[]}
-      config={{
-        autoConnect: false,
-        env: 'mainnet-beta',
-        metadata: {
-          name: 'UnifiedWallet',
-          description: 'UnifiedWallet',
-          url: 'https://jup.ag',
-          iconUrls: ['https://jup.ag/favicon.ico'],
-        },
-        notificationCallback: WalletNotification,
-        walletlistExplanation: {
-          href: 'https://station.jup.ag/docs/additional-topics/wallet-list',
-        },
-      }}
-    >
-      <UnifiedWalletButton />
-    </UnifiedWalletProvider>
-  );
-};
+More Features
+-------------
 
-export default ExampleBaseOnly;
-```
+*   **Wallet Attachment**: Attach custom elements to specific wallets.
 
-- More example can be found on the demo page, or in `src/components/examples`
+FAQs
+----
 
-## More features
+*   **Why selective wallets?**: To avoid bloat and maintain a focus on widely-used and well-maintained wallets.
+*   **Notification System**: Optional to allow integration with existing systems. Check `src/components/examples/WalletNotification.tsx` for usage.
+*   **Adding/Developing a New Wallet**: We encourage development of Wallets that conform to WalletStandard or MWA for better discoverability.
 
-- [x] Wallet attachment
-  - Target specific wallet and attach custom element to it
-  - <img src="public/features/wallet-atachments.png" width="200" />
+* * *
 
-```tsx
-config={{
-  walletAttachments: { 
-    'Phantom': {
-      attachment: <div tw="text-xs rounded-md bg-red-500 px-2 mx-2 text-center">Auto Confirm</div>
-    } 
-  }
-}}
-```
-
-## FAQs
-
-- Why not ship with all wallets?
-
-  - Unnecessary bloat and bundle size on your dApp
-  - It's not sensible to always maintain an ever-growing list of wallets
-  - Many existing wallets are not well maintained, often with unpatched security, or abandoned development
-  - Lack of users
-  - Does not support Versioned Transaction, severely limiting the adoption of many innovative functionalities of dApp.
-  - And hopefully, a gradually disappearing list of installed wallet adapter, as they migrate to wallet-standard
-
-- Why not ship with notification by default
-
-  - Existing dApp might already have their own notification system
-  - Checkout `src/components/examples/WalletNotification.tsx` for an example of how to use the notification system
-
-- How to add/develop a new wallet?
-  - We recommend new developer develops Wallets that comforms to WalletStandard or MWA, to get instant discoverability.
-  - https://github.com/solana-labs/wallet-adapter/blob/master/WALLET.md
-
-### #By Raccoons
-
-<img src="public/raccoons_wallet.jpg" width="200" />
+_Proudly presented by Purple Squirrel Media_
+Message Purple Squirrel NFT Generator…
